@@ -34,5 +34,9 @@ public class BFQueue {
     public int size() {
         return queue.size();
     }
+
+    public boolean contains(Node son){
+        return queue.contains(son);
+    }
 }
 

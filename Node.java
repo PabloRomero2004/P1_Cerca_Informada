@@ -30,6 +30,12 @@ public class Node {
         this.path.add(state);
     }
 
+    public void setPath(List<State> path) {
+        for (State x:path){
+            this.path.add(x);
+        }
+    }
+
     public double getHeuristic() {
         return heuristic;
     }
