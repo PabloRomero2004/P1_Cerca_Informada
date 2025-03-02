@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,8 +24,13 @@ public class Node {
     }
 
     public List<State> getPath() {
-        return path;
+        List<State> pathCopy = new ArrayList<>();
+        for (State state : path) {
+            pathCopy.add(new State(state.getX(), state.getY(), state.getHeight())); // Nueva instancia
+        }
+        return pathCopy;
     }
+
 
     public void addToPath(State state) {
         this.path.add(state);

@@ -25,7 +25,7 @@ public class BFSearch{
         while (!found && pends.size()>0){
             parent = pends.dequeue();
             
-            if (parent.getState() == Ef.getState()){
+            if (parent.getState().equals(Ef.getState())){
                 found=true;
                 solution=parent.getPath();
             }
@@ -36,25 +36,21 @@ public class BFSearch{
                 manageSons(parent, parent.getState().getX(), parent.getState().getY()-1);
             }
             managed.add(parent.getState());
+            
         }
 
-        if (found){
-            return solution;
-        }
-        else{
-            return null;
-        }
+        return solution;
     }
 
 
     public void manageSons(Node parent, int x, int y){
         
-        if (x>=0 && y>=0){
+        if (x>=0 && y>=0 && x<10 && y<10){
             Node son = new Node(new State(x, y, map[y][x]), 0);
             son.setPath(parent.getPath());
 
             if (son.getState().getHeight() != -1){
-                if (!managed.contains(son.getState()) && !pends.contains(son)){
+                if (!managedState(son.getState()) && !pends.contains(son)){
                     son.addToPath(son.getState());
                     son.setHeuristic(calculateHeuristic(parent.getState(), son.getState()));
                     pends.enqueue(son);
@@ -62,6 +58,16 @@ public class BFSearch{
             }
         }
     }
+
+    public boolean managedState(State state) {
+        for (State elem : managed) {
+            if (elem.getX() == state.getX() && elem.getY() == state.getY()) {
+                return true; 
+            }
+        }
+        return false;
+    }
+    
 
 
 

@@ -18,13 +18,22 @@ public class Main {
         }
 
         Node start = new Node(new State(0, 0, map[0][0]), 0);
+        start.addToPath(new State(0, 0, map[0][0]));
         Node end = new Node(new State(9, 9, map[9][9]), 0);
 
         BFSearch BF = new BFSearch(map, start, end);
 
         solList=BF.search();
 
-        if (solList == null) System.out.println("No hi ha solució");
+        if (!solList.isEmpty()) {
+            for (State state : solList) {
+                System.out.println("("+state.getX()+", "+state.getY()+") ");
+            }
+        }
+        else {
+            System.out.println("No hi ha solució");
+        }
+        
     }
 
 

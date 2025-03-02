@@ -46,4 +46,10 @@ public class State {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        State state = (State) obj;
+        return x == state.x && y == state.y && height == state.height; // Compara valores
+    }
+
 }

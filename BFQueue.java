@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
     
 public class BFQueue {
     private LinkedList<Node> queue;
@@ -35,8 +36,20 @@ public class BFQueue {
         return queue.size();
     }
 
-    public boolean contains(Node son){
-        return queue.contains(son);
+
+    public boolean contains(Node node) {
+        for (Node elem : queue) {
+            if (elem.getState().getX() == node.getState().getX() && elem.getState().getY() == node.getState().getY()) {
+                return true; 
+            }
+        }
+        return false;
+    }
+
+    public void obtainNodes() {
+        for (Node node : queue) {
+            System.out.println(node.getState());
+        }
     }
 }
 
