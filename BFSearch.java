@@ -6,13 +6,15 @@ public class BFSearch{
     private int[][] map;
     private List<State> managed;
     private Node Ei, Ef;
+    private Heuristic h;
 
-    public BFSearch(int[][] map, Node Ei, Node Ef){
+    public BFSearch(int[][] map, Node Ei, Node Ef, Heuristic h){
        pends = new BFQueue();
        managed = new LinkedList<>();
        this.map=map;
        this.Ei = Ei;
        this.Ef = Ef;
+       this.h = h;
     }
 
     public List<State> search() {

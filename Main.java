@@ -21,7 +21,9 @@ public class Main {
         start.addToPath(new State(0, 0, map[0][0]));
         Node end = new Node(new State(9, 9, map[9][9]), 0);
 
-        BFSearch BF = new BFSearch(map, start, end);
+        Heuristic h = new DistanceHeuristic();          //declarem el tipus de heuristica que utilitzarem
+
+        BFSearch BF = new BFSearch(map, start, end, h);
 
         solList=BF.search();
 
