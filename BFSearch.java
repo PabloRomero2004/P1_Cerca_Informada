@@ -54,7 +54,7 @@ public class BFSearch{
             if (son.getState().getHeight() != -1){
                 if (!managedState(son.getState()) && !pends.contains(son)){
                     son.addToPath(son.getState());
-                    son.setHeuristic(calculateHeuristic(parent.getState(), son.getState()));
+                    son.setHeuristic(h.calculateHeuristic(son, parent, Ef));
                     pends.enqueue(son);
                 }
             }
@@ -71,10 +71,7 @@ public class BFSearch{
     }
     
 
-
-
-
-    public double calculateHeuristic (State parent, State son){
+    /*public double calculateHeuristic (State parent, State son){
         return time_move(parent.getHeight(), son.getHeight()) + dist_final(son.getX(),son.getY()) + diff_height(son.getHeight());
     }
 
@@ -101,7 +98,7 @@ public class BFSearch{
 
     public double diff_height(int actualz){
         return Math.sqrt(Math.pow(actualz-(Ef.getState().getHeight()), 2));
-    }
+    }*/
 }
 
     
