@@ -21,6 +21,7 @@ public class Main {
         start.addToPath(new State(0, 0, map[0][0]));
         Node end = new Node(new State(9, 9, map[9][9]), 0);
 
+        /*
         System.out.println("Distància hohoi");
         Heuristic h = new DistanceHeuristic();          //declarem el tipus de heuristica que utilitzarem
 
@@ -62,6 +63,24 @@ public class Main {
         BF = new BFSearch(map, start, end, h);
 
         solList=BF.search();
+
+        if (!solList.isEmpty()) {
+            for (State state : solList) {
+                System.out.println("("+state.getX()+", "+state.getY()+") ");
+            }
+        }
+        else {
+            System.out.println("No hi ha solució");
+        }
+        */
+
+
+        System.out.println("\n\nTemps A* hohoi");
+        Heuristic h = new TimeHeuristic();          //declarem el tipus de heuristica que utilitzarem
+
+        A_star aStar = new A_star(map, start, end, h);
+
+        solList=aStar.search();
 
         if (!solList.isEmpty()) {
             for (State state : solList) {

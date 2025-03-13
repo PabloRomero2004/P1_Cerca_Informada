@@ -72,10 +72,10 @@ public class A_star {
     public double calculateAcum(Node parent, Node son){
         double cost = 0;
         
-        cost = son.getState().getHeight()-Ef.getState().getHeight();
+        cost = son.getState().getHeight()-parent.getState().getHeight();
 
-        if (cost<0){
-            cost = cost*(-1) + 1;
+        if (cost>0){
+            cost = cost + 1;
         }
         else{
             cost = 1/2;

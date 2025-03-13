@@ -72,7 +72,8 @@ public class AQueue {
             }
 
         }
-        //elem.getF();  //falte substuir
+        queue.remove(i);
+        enqueue(better);
 
     }
 
