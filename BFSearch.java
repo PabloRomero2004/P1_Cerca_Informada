@@ -17,19 +17,18 @@ public class BFSearch{
        this.h = h;
     }
 
-    public List<State> search() {
-        List<State> solution = new LinkedList<>();
+    public Node search() {
         boolean found = false;
-        Node parent;
+        Node parent = null;
 
         pends.enqueue(Ei);
+        int iter=0;
 
         while (!found && pends.size()>0){
             parent = pends.dequeue();
             
             if (parent.getState().equals(Ef.getState())){
                 found=true;
-                solution=parent.getPath();
             }
             else{
                 manageSons(parent, parent.getState().getX()+1, parent.getState().getY());
@@ -38,10 +37,11 @@ public class BFSearch{
                 manageSons(parent, parent.getState().getX(), parent.getState().getY()-1);
             }
             managed.add(parent.getState());
-            
+            iter++;
         }
 
-        return solution;
+        parent.setIter(iter);
+        return parent;
     }
 
 
@@ -55,10 +55,26 @@ public class BFSearch{
                 if (!managedState(son.getState()) && !pends.contains(son)){
                     son.addToPath(son.getState());
                     son.setHeuristic(h.calculateHeuristic(son, parent, Ef));
+                    son.setg(calculateAcum(parent, son), parent.getg());
                     pends.enqueue(son);
                 }
             }
         }
+    }
+
+    public double calculateAcum(Node parent, Node son){
+        double cost = 0;
+        
+        cost = son.getState().getHeight()-parent.getState().getHeight();
+
+        if (cost>=0){
+            cost = cost + 1;
+        }
+        else{
+            cost = 0.5;
+        }
+
+        return cost;
     }
 
     public boolean managedState(State state) {

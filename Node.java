@@ -8,6 +8,7 @@ public class Node {
     private double heuristic;
     private double f;           //CostTotal
     private double g;           //Cost acum
+    private int iter;
 
     // Constructor
     public Node(State state, double heuristic) {
@@ -16,6 +17,7 @@ public class Node {
         this.path = new LinkedList<>();
         this.f=0;
         this.g=0;
+        this.iter=0;
     }
 
     // Getters y Setters
@@ -25,6 +27,10 @@ public class Node {
 
     public double getF() {
         return f;
+    }
+
+    public int getIter() {
+        return this.iter;
     }
 
     public double getg() {
@@ -63,8 +69,12 @@ public class Node {
         this.f = h+this.g;
     }
 
-    public double setg(double lastg) {
-        return this.g+=lastg;
+    public void setIter(int it) {
+        this.iter = it;
+    }
+
+    public double setg(double costToMove, double lastg) {
+        return this.g=lastg+costToMove;
     }
 
     public void setHeuristic(double heuristic) {

@@ -17,10 +17,10 @@ public class A_star {
        this.h = h;
     }
 
-    public List<State> search() {
-        List<State> solution = new LinkedList<>();
+    public Node search() {
         boolean found = false;
-        Node parent;
+        Node parent = null;
+        int iter = 0;
 
         pends.enqueue(Ei);
 
@@ -29,7 +29,6 @@ public class A_star {
             
             if (parent.getState().equals(Ef.getState())){
                 found=true;
-                solution=parent.getPath();
             }
             else{
                 manageSons(parent, parent.getState().getX()+1, parent.getState().getY());
@@ -38,10 +37,10 @@ public class A_star {
                 manageSons(parent, parent.getState().getX(), parent.getState().getY()-1);
             }
             managed.add(parent.getState());
-            
+            iter++;
         }
-
-        return solution;
+        parent.setIter(iter);
+        return parent;
     }
 
 
@@ -60,7 +59,7 @@ public class A_star {
                         x++;
                     }
                     
-                    son.setg(calculateAcum(parent, son));
+                    son.setg(calculateAcum(parent, son), parent.getg());
                     son.setF(h.calculateHeuristic(son, parent, Ef));
                     
                     if(!pends.contains(son)){
@@ -79,7 +78,7 @@ public class A_star {
         
         cost = son.getState().getHeight()-parent.getState().getHeight();
 
-        if (cost>0){
+        if (cost>=0){
             cost = cost + 1;
         }
         else{

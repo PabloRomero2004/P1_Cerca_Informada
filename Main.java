@@ -8,7 +8,8 @@ public class Main {
 
     public static void main(String[] args) {
         String filename = "mapa1.txt";  // Cambia esto por la ruta real del archivo
-        List<State> solList = new LinkedList<>(); 
+        //List<State> solList = new LinkedList<>();
+        Node sol;
         List<Heuristic> heur = new LinkedList<>();
 
         String[] titles = {"\n\nDistance path", "\n\nHeigh path", "\n\nTime path"};
@@ -38,12 +39,14 @@ public class Main {
 
             BF = new BFSearch(map, start, end, h);
 
-            solList=BF.search();
+            sol=BF.search();
 
-            if (!solList.isEmpty()) {
-                for (State state : solList) {
+            if (!sol.getPath().isEmpty()) {
+                for (State state : sol.getPath()) {
                     System.out.println("("+state.getX()+", "+state.getY()+") ");
                 }
+                System.out.println("Cost temporal: "+sol.getg());
+                System.out.print("Number of iterations: "+sol.getIter());
             }
             else {
                 System.out.println("No hi ha solució");
@@ -54,16 +57,18 @@ public class Main {
         System.out.print("\n\n---------------------\nA* Search:\n---------------------");
         for (int i=0; i<3; i++){
             System.out.println(titles[i]);
-            h = new TimeHeuristic();          //declarem el tipus de heuristica que utilitzarem
+            h = heur.get(i);         //declarem el tipus de heuristica que utilitzarem
 
             A_star aStar = new A_star(map, start, end, h);
 
-            solList=aStar.search();
+            sol=aStar.search();
 
-            if (!solList.isEmpty()) {
-                for (State state : solList) {
+            if (!sol.getPath().isEmpty()) {
+                for (State state : sol.getPath()) {
                     System.out.println("("+state.getX()+", "+state.getY()+") ");
                 }
+                System.out.println("Cost temporal: "+sol.getg());
+                System.out.print("Number of iterations: "+sol.getIter());
             }
             else {
                 System.out.println("No hi ha solució");

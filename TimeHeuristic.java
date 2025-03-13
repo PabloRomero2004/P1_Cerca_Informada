@@ -11,7 +11,7 @@ public class TimeHeuristic implements Heuristic {
         
         return (Math.sqrt(Math.pow((son.getState().getX()-(Ef.getState().getX())),2)) 
         + Math.sqrt(Math.pow((son.getState().getY()-(Ef.getState().getY())),2))) 
-        * upDown;   //Se multiplique per diffaltura entre el final i la actual si és pujada + 1 o 1/2 si és baixada.
+        * upDown;   //Es multiplica per diffaltura entre el final i la actual si és pujada + 1 o 1/2 si és baixada.
     }
     
 }
