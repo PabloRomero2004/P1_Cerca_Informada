@@ -54,10 +54,6 @@ public class A_star {
             if (son.getState().getHeight() != -1){
                 if (!managedState(son.getState())){
                     son.addToPath(son.getState());
-
-                    if (parent.getState().getX() == 4 && parent.getState().getY() == 4){      //prova
-                        x++;
-                    }
                     
                     son.setg(calculateAcum(parent, son), parent.getg());
                     son.setF(h.calculateHeuristic(son, parent, Ef));
