@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        String filename = "mapa1.txt";  // Cambia esto por la ruta real del archivo
+        String filename = "mapa2.txt";  // Cambia esto por la ruta real del archivo
         //List<State> solList = new LinkedList<>();
         Node sol;
         List<Heuristic> heur = new LinkedList<>();
@@ -27,7 +27,7 @@ public class Main {
 
         Node start = new Node(new State(0, 0, map[0][0]), 0);
         start.addToPath(new State(0, 0, map[0][0]));
-        Node end = new Node(new State(9, 9, map[9][9]), 0);
+        Node end = new Node(new State(8, 5, map[8][5]), 0);
 
         Heuristic h;
         BFSearch BF;
