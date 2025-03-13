@@ -55,7 +55,7 @@ public class AQueue {
             if (elem.getState().getX() == state.getX() && elem.getState().getY() == state.getY()) {
                 trobat = true; 
             }
-
+            i++;
         }
         return elem.getF();
     }
@@ -70,8 +70,9 @@ public class AQueue {
             if (elem.getState().getX() == better.getState().getX() && elem.getState().getY() == better.getState().getY()) {
                 trobat = true; 
             }
-
+            i++;
         }
+        i--;
         queue.remove(i);
         enqueue(better);
 

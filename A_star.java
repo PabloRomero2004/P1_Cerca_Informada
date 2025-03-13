@@ -55,10 +55,15 @@ public class A_star {
             if (son.getState().getHeight() != -1){
                 if (!managedState(son.getState())){
                     son.addToPath(son.getState());
+
+                    if (parent.getState().getX() == 4 && parent.getState().getY() == 4){      //prova
+                        x++;
+                    }
+                    
+                    son.setg(calculateAcum(parent, son));
+                    son.setF(h.calculateHeuristic(son, parent, Ef));
                     
                     if(!pends.contains(son)){
-                        son.setg(calculateAcum(parent, son));
-                        son.setF(h.calculateHeuristic(son, parent, Ef));
                         pends.enqueue(son);
                     }
                     else if (son.getF() < pends.costInPends(son.getState())){
@@ -78,7 +83,7 @@ public class A_star {
             cost = cost + 1;
         }
         else{
-            cost = 1/2;
+            cost = 0.5;
         }
 
         return cost;

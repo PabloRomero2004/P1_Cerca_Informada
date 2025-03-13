@@ -6,7 +6,7 @@ public class TimeHeuristic implements Heuristic {
             upDown = upDown*(-1) + 1;
         }
         else{
-            upDown = 1/2;
+            upDown = 0.5;
         }
         
         return (Math.sqrt(Math.pow((son.getState().getX()-(Ef.getState().getX())),2)) 

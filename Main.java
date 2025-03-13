@@ -9,7 +9,14 @@ public class Main {
     public static void main(String[] args) {
         String filename = "mapa1.txt";  // Cambia esto por la ruta real del archivo
         List<State> solList = new LinkedList<>(); 
-        
+        List<Heuristic> heur = new LinkedList<>();
+
+        String[] titles = {"\n\nDistance path", "\n\nHeigh path", "\n\nTime path"};
+
+        heur.add(new DistanceHeuristic());
+        heur.add(new HeightHeuristic());
+        heur.add(new TimeHeuristic());
+
         int[][] map = null;
         try {
             map = getMap(filename);
@@ -21,75 +28,49 @@ public class Main {
         start.addToPath(new State(0, 0, map[0][0]));
         Node end = new Node(new State(9, 9, map[9][9]), 0);
 
-        /*
-        System.out.println("Distància hohoi");
-        Heuristic h = new DistanceHeuristic();          //declarem el tipus de heuristica que utilitzarem
+        Heuristic h;
+        BFSearch BF;
 
-        BFSearch BF = new BFSearch(map, start, end, h);
+        System.out.print("---------------------\nBF Search:\n---------------------");
+        for (int i=0; i<3; i++){
+            System.out.println(titles[i]);
+            h = heur.get(i);          //declarem el tipus de heuristica que utilitzarem
 
-        solList=BF.search();
+            BF = new BFSearch(map, start, end, h);
 
-        if (!solList.isEmpty()) {
-            for (State state : solList) {
-                System.out.println("("+state.getX()+", "+state.getY()+") ");
+            solList=BF.search();
+
+            if (!solList.isEmpty()) {
+                for (State state : solList) {
+                    System.out.println("("+state.getX()+", "+state.getY()+") ");
+                }
+            }
+            else {
+                System.out.println("No hi ha solució");
             }
         }
-        else {
-            System.out.println("No hi ha solució");
-        }
+        
 
+        System.out.print("\n\n---------------------\nA* Search:\n---------------------");
+        for (int i=0; i<3; i++){
+            System.out.println(titles[i]);
+            h = new TimeHeuristic();          //declarem el tipus de heuristica que utilitzarem
 
-        System.out.println("\n\nAltura hohoi");
-        h = new HeightHeuristic();          //declarem el tipus de heuristica que utilitzarem
+            A_star aStar = new A_star(map, start, end, h);
 
-        BF = new BFSearch(map, start, end, h);
+            solList=aStar.search();
 
-        solList=BF.search();
-
-        if (!solList.isEmpty()) {
-            for (State state : solList) {
-                System.out.println("("+state.getX()+", "+state.getY()+") ");
+            if (!solList.isEmpty()) {
+                for (State state : solList) {
+                    System.out.println("("+state.getX()+", "+state.getY()+") ");
+                }
+            }
+            else {
+                System.out.println("No hi ha solució");
             }
         }
-        else {
-            System.out.println("No hi ha solució");
-        }
 
-
-
-        System.out.println("\n\nTemps hohoi");
-        h = new TimeHeuristic();          //declarem el tipus de heuristica que utilitzarem
-
-        BF = new BFSearch(map, start, end, h);
-
-        solList=BF.search();
-
-        if (!solList.isEmpty()) {
-            for (State state : solList) {
-                System.out.println("("+state.getX()+", "+state.getY()+") ");
-            }
-        }
-        else {
-            System.out.println("No hi ha solució");
-        }
-        */
-
-
-        System.out.println("\n\nTemps A* hohoi");
-        Heuristic h = new TimeHeuristic();          //declarem el tipus de heuristica que utilitzarem
-
-        A_star aStar = new A_star(map, start, end, h);
-
-        solList=aStar.search();
-
-        if (!solList.isEmpty()) {
-            for (State state : solList) {
-                System.out.println("("+state.getX()+", "+state.getY()+") ");
-            }
-        }
-        else {
-            System.out.println("No hi ha solució");
-        }
+    
         
     }
 
